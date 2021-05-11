@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-class ImageWarper():
+class ImageWarper:
 
     def __init__(self, transformed_dimensions: list):
         self.tranformation_matrix = None
