@@ -5,7 +5,7 @@ class ImageMasker:
     
     def __init__(self, region_of_interest, image):
         self.region_of_interest = region_of_interest
-        self.stencil = np.zeros_like(image)
+        self.stencil = np.zeros_like(image[:,:,0])
 
     def set_region_of_interest(self, region_of_interest: list):
         self.region_of_interest = region_of_interest
@@ -22,6 +22,7 @@ class ImageMasker:
     def apply_mask_on_region_of_interest(self, image):
         polygon = np.array(self.region_of_interest)
         cv2.fillConvexPoly(self.stencil, polygon, 1)
-        self.image = cv2.bitwise_and(image[:,:,0], image[:,:,0], mask=stencil)
-        return self.image
+        #print(image)
+        masked_image = cv2.bitwise_and(image[:,:,0], image[:,:,0], mask=self.stencil)
+        return masked_image
     
